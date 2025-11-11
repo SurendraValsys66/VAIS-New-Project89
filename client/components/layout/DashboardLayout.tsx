@@ -1094,8 +1094,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                           }
                         `}</style>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-semibold text-gray-700">Daily Limit</span>
-                          <span className="text-xs font-semibold text-valasys-orange">45/100</span>
+                          <span className="text-xs font-semibold text-gray-700">
+                            Daily Limit
+                          </span>
+                          <span className="text-xs font-semibold text-valasys-orange">
+                            45/100
+                          </span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                           <div
@@ -1103,7 +1107,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                             style={{ width: "45%" }}
                           />
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">55 lookups remaining today</p>
+                        <p className="text-xs text-gray-500 mt-2">
+                          55 lookups remaining today
+                        </p>
                       </div>
 
                       <div className="px-4 pt-3 pb-2 text-[11px] font-semibold text-gray-500">
