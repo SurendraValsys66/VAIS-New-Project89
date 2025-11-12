@@ -533,19 +533,6 @@ export default function WishlistProspects() {
                                   <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-50"
-                                    onClick={() => handleDownload(list)}
-                                  >
-                                    <Download className="w-4 h-4" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Download as CSV</TooltipContent>
-                              </Tooltip>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
                                     className="h-8 w-8 p-0 text-red-600 hover:bg-red-50"
                                     onClick={() => handleDeleteStart(list)}
                                   >
