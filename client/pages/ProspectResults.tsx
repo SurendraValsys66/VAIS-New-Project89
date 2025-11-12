@@ -611,6 +611,7 @@ export default function ProspectResults() {
     open: false,
     prospectId: "",
     prospectName: "",
+    prospectIds: [] as string[],
   });
 
   useEffect(() => {
