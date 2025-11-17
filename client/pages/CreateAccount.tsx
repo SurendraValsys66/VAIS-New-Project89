@@ -400,33 +400,78 @@ export default function CreateAccount() {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <input
-                    id="terms"
-                    type="checkbox"
-                    required
-                    className="mt-1 h-4 w-4 rounded border-valasys-gray-300 text-valasys-orange focus:ring-valasys-orange/20"
-                  />
-                  <label
-                    htmlFor="terms"
-                    className="text-sm text-valasys-gray-700"
-                  >
-                    By signing up, you agree to our{" "}
-                    <a
-                      href="#"
-                      className="text-valasys-orange hover:text-valasys-orange-light underline"
+                <div className="space-y-3 rounded-lg bg-valasys-orange/5 border border-valasys-orange/20 p-4">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="viewAgreement"
+                      checked={agreementAcknowledged}
+                      disabled={true}
+                      className="mt-0.5"
+                    />
+                    <label
+                      htmlFor="viewAgreement"
+                      className="text-sm text-valasys-gray-700 flex flex-col space-y-1"
                     >
-                      Terms & Conditions
-                    </a>{" "}
-                    and{" "}
-                    <a
-                      href="#"
-                      className="text-valasys-orange hover:text-valasys-orange-light underline"
+                      <span>
+                        I have read and understood the{" "}
+                        <button
+                          type="button"
+                          onClick={() => setAgreementModalOpen(true)}
+                          className="text-valasys-orange hover:text-valasys-orange-light underline font-semibold"
+                        >
+                          Master Subscriber Agreement
+                        </button>
+                      </span>
+                      <span className="text-xs text-valasys-gray-600">
+                        {agreementAcknowledged ? (
+                          <span className="text-valasys-green font-semibold flex items-center space-x-1">
+                            <CheckCircle className="h-3 w-3" />
+                            <span>Agreement acknowledged</span>
+                          </span>
+                        ) : (
+                          <span className="text-valasys-orange">
+                            Required: Please review the agreement to proceed
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="flex items-start space-x-3 pt-2">
+                    <Checkbox
+                      id="terms"
+                      checked={termsChecked}
+                      onCheckedChange={(checked) =>
+                        setTermsChecked(checked === true)
+                      }
+                      disabled={!agreementAcknowledged}
+                      className="mt-0.5"
+                    />
+                    <label
+                      htmlFor="terms"
+                      className={`text-sm ${
+                        agreementAcknowledged
+                          ? "text-valasys-gray-700"
+                          : "text-valasys-gray-400 cursor-not-allowed"
+                      }`}
                     >
-                      Privacy Policy
-                    </a>
-                    .
-                  </label>
+                      I agree to the terms and{" "}
+                      <a
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        className="text-valasys-orange hover:text-valasys-orange-light underline"
+                      >
+                        Privacy Policy
+                      </a>
+                      .
+                      <span
+                        aria-hidden="true"
+                        className="text-red-500 ml-1"
+                      >
+                        *
+                      </span>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="flex items-center justify-between">
