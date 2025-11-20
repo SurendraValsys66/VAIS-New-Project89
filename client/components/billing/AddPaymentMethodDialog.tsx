@@ -336,31 +336,31 @@ export function AddPaymentMethodDialog({
                 setPaymentType("card");
                 setErrors([]);
               }}
-              className={`group relative p-4 rounded-xl border-2 transition-all duration-300 ${
+              className={`group relative p-5 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                 paymentType === "card"
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? "border-blue-500 bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg"
+                  : "border-gray-200 hover:border-gray-300 hover:shadow-md"
               }`}
             >
               <div className="flex flex-col items-center gap-3">
                 <div
-                  className={`p-3 rounded-lg transition-all ${
+                  className={`p-3 rounded-xl transition-all transform ${
                     paymentType === "card"
-                      ? "bg-blue-500 text-white"
+                      ? "bg-blue-500 text-white scale-110 shadow-lg"
                       : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
                   }`}
                 >
                   <CreditCard className="w-6 h-6" />
                 </div>
                 <div className="text-center">
-                  <p className="font-semibold text-gray-900">Card</p>
+                  <p className="font-bold text-gray-900">Card</p>
                   <p className="text-xs text-gray-500 mt-1">
                     Visa, Mastercard, Amex
                   </p>
                 </div>
               </div>
               {paymentType === "card" && (
-                <div className="absolute top-2 right-2 bg-blue-500 rounded-full p-1">
+                <div className="absolute -top-2 -right-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-1.5 shadow-lg animate-bounce">
                   <Check className="w-4 h-4 text-white" />
                 </div>
               )}
@@ -371,17 +371,17 @@ export function AddPaymentMethodDialog({
                 setPaymentType("paypal");
                 setErrors([]);
               }}
-              className={`group relative p-4 rounded-xl border-2 transition-all duration-300 ${
+              className={`group relative p-5 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                 paymentType === "paypal"
-                  ? "border-blue-600 bg-blue-50"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? "border-blue-700 bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg"
+                  : "border-gray-200 hover:border-gray-300 hover:shadow-md"
               }`}
             >
               <div className="flex flex-col items-center gap-3">
                 <div
-                  className={`p-3 rounded-lg transition-all ${
+                  className={`p-3 rounded-xl transition-all transform ${
                     paymentType === "paypal"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-blue-600 text-white scale-110 shadow-lg"
                       : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
                   }`}
                 >
@@ -394,14 +394,14 @@ export function AddPaymentMethodDialog({
                   </svg>
                 </div>
                 <div className="text-center">
-                  <p className="font-semibold text-gray-900">PayPal</p>
+                  <p className="font-bold text-gray-900">PayPal</p>
                   <p className="text-xs text-gray-500 mt-1">
                     Fast and secure
                   </p>
                 </div>
               </div>
               {paymentType === "paypal" && (
-                <div className="absolute top-2 right-2 bg-blue-600 rounded-full p-1">
+                <div className="absolute -top-2 -right-2 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full p-1.5 shadow-lg animate-bounce">
                   <Check className="w-4 h-4 text-white" />
                 </div>
               )}
