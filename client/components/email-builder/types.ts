@@ -1,4 +1,11 @@
-export type BlockType = "text" | "image" | "button" | "divider" | "header" | "footer" | "spacer";
+export type BlockType =
+  | "text"
+  | "image"
+  | "button"
+  | "divider"
+  | "header"
+  | "footer"
+  | "spacer";
 
 export interface TextBlock {
   type: "text";

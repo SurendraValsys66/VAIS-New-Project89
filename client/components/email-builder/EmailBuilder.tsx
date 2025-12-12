@@ -45,7 +45,7 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
   const [template, setTemplate] = useState<EmailTemplate>(() => {
     if (templateId) {
       const existing = getTemplatesFromLocalStorage().find(
-        (t) => t.id === templateId
+        (t) => t.id === templateId,
       );
       return existing || createEmptyTemplate();
     }
@@ -115,7 +115,7 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
         updatedAt: new Date().toISOString(),
       }));
     },
-    [template.blocks]
+    [template.blocks],
   );
 
   const handleSaveTemplate = () => {
@@ -220,7 +220,7 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                           "p-2 rounded cursor-pointer text-sm transition-all",
                           selectedBlockId === block.id
                             ? "bg-valasys-orange text-white ring-2 ring-valasys-orange"
-                            : "bg-gray-100 hover:bg-gray-200"
+                            : "bg-gray-100 hover:bg-gray-200",
                         )}
                         onClick={() => setSelectedBlockId(block.id)}
                       >

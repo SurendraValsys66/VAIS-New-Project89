@@ -36,9 +36,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
             isSelected={isSelected}
             isEditing={isEditing || false}
             onEdit={() => onBlockSelect?.(block.id)}
-            onContentChange={(content) =>
-              onBlockUpdate({ ...block, content })
-            }
+            onContentChange={(content) => onBlockUpdate({ ...block, content })}
           />
         </div>
       );
@@ -83,9 +81,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
           <FooterBlockComponent
             block={block}
             isSelected={isSelected}
-            onContentChange={(content) =>
-              onBlockUpdate({ ...block, content })
-            }
+            onContentChange={(content) => onBlockUpdate({ ...block, content })}
           />
         </div>
       );

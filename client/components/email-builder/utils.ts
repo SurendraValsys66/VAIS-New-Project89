@@ -1,4 +1,14 @@
-import { ContentBlock, EmailTemplate, TextBlock, ImageBlock, ButtonBlock, DividerBlock, HeaderBlock, FooterBlock, SpacerBlock } from "./types";
+import {
+  ContentBlock,
+  EmailTemplate,
+  TextBlock,
+  ImageBlock,
+  ButtonBlock,
+  DividerBlock,
+  HeaderBlock,
+  FooterBlock,
+  SpacerBlock,
+} from "./types";
 
 export function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -65,7 +75,9 @@ export function createHeaderBlock(logo = ""): HeaderBlock {
   };
 }
 
-export function createFooterBlock(content = "© 2024 Valasys. All rights reserved."): FooterBlock {
+export function createFooterBlock(
+  content = "© 2024 Valasys. All rights reserved.",
+): FooterBlock {
   return {
     type: "footer",
     id: generateId(),
@@ -121,7 +133,9 @@ export function renderBlockToHTML(block: ContentBlock): string {
 }
 
 export function renderTemplateToHTML(template: EmailTemplate): string {
-  const bodyContent = template.blocks.map((block) => renderBlockToHTML(block)).join("");
+  const bodyContent = template.blocks
+    .map((block) => renderBlockToHTML(block))
+    .join("");
   return `<!DOCTYPE html>
 <html>
 <head>

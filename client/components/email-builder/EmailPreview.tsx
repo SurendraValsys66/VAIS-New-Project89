@@ -35,7 +35,9 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
     }
   };
 
-  const htmlContent = template.blocks.map((block) => renderBlockToHTML(block)).join("");
+  const htmlContent = template.blocks
+    .map((block) => renderBlockToHTML(block))
+    .join("");
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -48,7 +50,11 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
           variant={device === "mobile" ? "default" : "outline"}
           size="sm"
           onClick={() => setDevice("mobile")}
-          className={device === "mobile" ? "bg-valasys-orange hover:bg-valasys-orange/90" : ""}
+          className={
+            device === "mobile"
+              ? "bg-valasys-orange hover:bg-valasys-orange/90"
+              : ""
+          }
         >
           <Smartphone className="w-4 h-4 mr-1" />
           Mobile
@@ -57,7 +63,11 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
           variant={device === "tablet" ? "default" : "outline"}
           size="sm"
           onClick={() => setDevice("tablet")}
-          className={device === "tablet" ? "bg-valasys-orange hover:bg-valasys-orange/90" : ""}
+          className={
+            device === "tablet"
+              ? "bg-valasys-orange hover:bg-valasys-orange/90"
+              : ""
+          }
         >
           <Tablet className="w-4 h-4 mr-1" />
           Tablet
@@ -66,7 +76,11 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
           variant={device === "desktop" ? "default" : "outline"}
           size="sm"
           onClick={() => setDevice("desktop")}
-          className={device === "desktop" ? "bg-valasys-orange hover:bg-valasys-orange/90" : ""}
+          className={
+            device === "desktop"
+              ? "bg-valasys-orange hover:bg-valasys-orange/90"
+              : ""
+          }
         >
           <Monitor className="w-4 h-4 mr-1" />
           Desktop
@@ -95,7 +109,7 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
             View HTML Source
           </summary>
           <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto max-h-40 text-gray-600">
-{`<!DOCTYPE html>
+            {`<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">

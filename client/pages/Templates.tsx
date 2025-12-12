@@ -14,10 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import {
-  Alert,
-  AlertDescription,
-} from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   getTemplatesFromLocalStorage,
   deleteTemplateFromLocalStorage,
@@ -31,7 +28,7 @@ export default function Templates() {
   const [templates, setTemplates] = useState<EmailTemplate[]>([]);
   const [view, setView] = useState<View>("list");
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
-    null
+    null,
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -68,9 +65,10 @@ export default function Templates() {
     setSelectedTemplateId(null);
   };
 
-  const filteredTemplates = templates.filter((template) =>
-    template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    template.subject.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredTemplates = templates.filter(
+    (template) =>
+      template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      template.subject.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const formatDate = (dateString: string) => {
@@ -101,7 +99,8 @@ export default function Templates() {
               Email Templates
             </h1>
             <p className="text-gray-600 mt-2">
-              Create and manage professional email templates with our drag-and-drop builder
+              Create and manage professional email templates with our
+              drag-and-drop builder
             </p>
           </div>
           <Button

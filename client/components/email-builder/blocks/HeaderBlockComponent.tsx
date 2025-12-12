@@ -36,7 +36,11 @@ export const HeaderBlockComponent: React.FC<HeaderBlockComponentProps> = ({
       }}
     >
       {block.logo ? (
-        <img src={block.logo} alt="Logo" style={{ maxWidth: "200px", height: "auto" }} />
+        <img
+          src={block.logo}
+          alt="Logo"
+          style={{ maxWidth: "200px", height: "auto" }}
+        />
       ) : (
         <label className="flex items-center justify-center cursor-pointer hover:bg-gray-100 rounded p-4">
           <div className="flex flex-col items-center">
