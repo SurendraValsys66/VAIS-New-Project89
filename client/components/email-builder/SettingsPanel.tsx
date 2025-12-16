@@ -20,14 +20,16 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [groupPaddingSides, setGroupPaddingSides] = useState(true);
   const [groupMarginSides, setGroupMarginSides] = useState(false);
   const [applyBorderToAllSides, setApplyBorderToAllSides] = useState(true);
-  const [paddingTop, setPaddingTop] = useState(block?.padding ?? 0);
-  const [paddingRight, setPaddingRight] = useState(block?.padding ?? 0);
-  const [paddingBottom, setPaddingBottom] = useState(block?.padding ?? 0);
-  const [paddingLeft, setPaddingLeft] = useState(block?.padding ?? 0);
-  const [marginTop, setMarginTop] = useState(block?.margin ?? 0);
-  const [marginRight, setMarginRight] = useState(block?.margin ?? 0);
-  const [marginBottom, setMarginBottom] = useState(block?.margin ?? 0);
-  const [marginLeft, setMarginLeft] = useState(block?.margin ?? 0);
+  const paddingValue = "padding" in (block || {}) ? (block as any).padding ?? 0 : 0;
+  const marginValue = "margin" in (block || {}) ? (block as any).margin ?? 0 : 0;
+  const [paddingTop, setPaddingTop] = useState(paddingValue);
+  const [paddingRight, setPaddingRight] = useState(paddingValue);
+  const [paddingBottom, setPaddingBottom] = useState(paddingValue);
+  const [paddingLeft, setPaddingLeft] = useState(paddingValue);
+  const [marginTop, setMarginTop] = useState(marginValue);
+  const [marginRight, setMarginRight] = useState(marginValue);
+  const [marginBottom, setMarginBottom] = useState(marginValue);
+  const [marginLeft, setMarginLeft] = useState(marginValue);
 
   if (!block) {
     return (
