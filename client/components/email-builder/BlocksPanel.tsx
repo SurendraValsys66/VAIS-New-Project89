@@ -212,7 +212,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
 
         <TabsContent
           value="blocks"
-          className="flex-1 flex flex-col overflow-auto m-0"
+          className="flex flex-col m-0"
         >
           <div className="p-4 border-b border-gray-200 sticky top-0 bg-white z-10">
             <Input
