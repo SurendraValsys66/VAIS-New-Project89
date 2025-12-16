@@ -562,14 +562,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         return (
           <div className="space-y-5">
             <div>
-              <Label
-                htmlFor="textContent"
-                className="text-xs font-semibold text-gray-700 mb-2 block"
-              >
+              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
                 Content
               </Label>
               <textarea
-                id="textContent"
                 value={block.content}
                 onChange={(e) =>
                   onBlockUpdate({ ...block, content: e.target.value })
@@ -583,15 +579,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               <h4 className="text-xs font-bold text-gray-900 mb-3">Layout</h4>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textWidth"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Width
                   </Label>
                   <div className="flex gap-2">
                     <Input
-                      id="textWidth"
                       type="number"
                       min="0"
                       max="100"
@@ -621,10 +613,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textAlignment"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
@@ -670,56 +659,140 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-gray-900 mb-3">Spacing</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-gray-900">Spacing</h4>
+              </div>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textPadding"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
-                    Padding
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="textPadding"
-                      type="number"
-                      min="0"
-                      value={block.padding}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          padding: parseInt(e.target.value),
-                        })
-                      }
-                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
-                    />
-                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-xs text-gray-700">Padding</Label>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="groupPadding"
+                        checked={groupPaddingSides}
+                        onCheckedChange={(checked) => setGroupPaddingSides(checked as boolean)}
+                      />
+                      <Label htmlFor="groupPadding" className="text-xs text-gray-600 cursor-pointer">
+                        Group sides
+                      </Label>
+                    </div>
                   </div>
+                  {groupPaddingSides ? (
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        min="0"
+                        value={paddingTop}
+                        onChange={(e) => handlePaddingChange(parseInt(e.target.value))}
+                        className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                      />
+                      <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">↑</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingTop}
+                          onChange={(e) => handlePaddingChange(parseInt(e.target.value), "top")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">→</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingRight}
+                          onChange={(e) => handlePaddingChange(parseInt(e.target.value), "right")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">↓</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingBottom}
+                          onChange={(e) => handlePaddingChange(parseInt(e.target.value), "bottom")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">←</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingLeft}
+                          onChange={(e) => handlePaddingChange(parseInt(e.target.value), "left")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textMargin"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
-                    Margin
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="textMargin"
-                      type="number"
-                      min="0"
-                      value={block.margin}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          margin: parseInt(e.target.value),
-                        })
-                      }
-                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
-                    />
-                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-xs text-gray-700">Margin</Label>
                   </div>
+                  {!groupMarginSides ? (
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        min="0"
+                        value={marginTop}
+                        onChange={(e) => handleMarginChange(parseInt(e.target.value))}
+                        className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                      />
+                      <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">↑</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginTop}
+                          onChange={(e) => handleMarginChange(parseInt(e.target.value), "top")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">→</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginRight}
+                          onChange={(e) => handleMarginChange(parseInt(e.target.value), "right")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">↓</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginBottom}
+                          onChange={(e) => handleMarginChange(parseInt(e.target.value), "bottom")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">←</span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginLeft}
+                          onChange={(e) => handleMarginChange(parseInt(e.target.value), "left")}
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -730,14 +803,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </h4>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textBgColor"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Color
                   </Label>
                   <Input
-                    id="textBgColor"
                     type="color"
                     value={block.backgroundColor}
                     onChange={(e) =>
@@ -746,6 +815,24 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                         backgroundColor: e.target.value,
                       })
                     }
+                  />
+                </div>
+                <div>
+                  <Label className="text-xs text-gray-700 mb-2 block">
+                    Image
+                  </Label>
+                  <Button variant="outline" size="sm" className="w-full text-xs">
+                    Add image
+                  </Button>
+                </div>
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Image URL
+                  </Label>
+                  <Input
+                    type="text"
+                    placeholder="https://example.com/image.jpg"
+                    className="focus:ring-valasys-orange focus:ring-2"
                   />
                 </div>
               </div>
@@ -757,15 +844,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </h4>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textRadius"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Radius
                   </Label>
                   <div className="flex gap-2">
                     <Input
-                      id="textRadius"
                       type="number"
                       min="0"
                       value={block.borderRadius}
@@ -784,18 +867,26 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-gray-900 mb-3">Borders</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-gray-900">Borders</h4>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="applyBorder"
+                    checked={applyBorderToAllSides}
+                    onCheckedChange={(checked) => setApplyBorderToAllSides(checked as boolean)}
+                  />
+                  <Label htmlFor="applyBorder" className="text-xs text-gray-600 cursor-pointer">
+                    Apply to all sides
+                  </Label>
+                </div>
+              </div>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textBorderWidth"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Size
                   </Label>
                   <div className="flex gap-2">
                     <Input
-                      id="textBorderWidth"
                       type="number"
                       min="0"
                       value={block.borderWidth}
@@ -812,14 +903,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textBorderColor"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Color
                   </Label>
                   <Input
-                    id="textBorderColor"
                     type="color"
                     value={block.borderColor}
                     onChange={(e) =>
