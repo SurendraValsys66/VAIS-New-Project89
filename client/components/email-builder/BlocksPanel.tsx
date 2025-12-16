@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDrag } from "react-dnd";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +18,7 @@ import {
   ShoppingCart,
   Menu,
   Film,
+  GripHorizontal,
 } from "lucide-react";
 import {
   createTitleBlock,
@@ -46,6 +48,37 @@ interface BlockOption {
   description: string;
   onCreate: () => ContentBlock;
 }
+
+interface DraggableBlockProps {
+  block: BlockOption;
+}
+
+const DraggableBlockButton: React.FC<DraggableBlockProps> = ({ block }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "block",
+    item: { block: block.onCreate() },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <button
+      ref={drag}
+      className={`flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 hover:border-valasys-orange hover:bg-orange-50 transition-all hover:shadow-md cursor-move ${
+        isDragging ? "opacity-50 scale-95" : ""
+      }`}
+    >
+      <div className="mb-2 relative">
+        {block.icon}
+        <div className="absolute -top-1 -right-1 text-valasys-orange">
+          <GripHorizontal className="w-3 h-3" />
+        </div>
+      </div>
+      <span className="text-sm font-medium text-gray-900">{block.label}</span>
+    </button>
+  );
+};
 
 export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -154,10 +187,6 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
       block.description.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleBlockClick = (block: BlockOption) => {
-    onAddBlock(block.onCreate());
-  };
-
   return (
     <div className="flex flex-col h-full bg-white border-r border-gray-200">
       <Tabs defaultValue="blocks" className="flex flex-col h-full">
@@ -199,16 +228,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
             <div className="p-4">
               <div className="grid grid-cols-3 gap-3">
                 {filteredBlocks.map((block) => (
-                  <button
-                    key={block.id}
-                    onClick={() => handleBlockClick(block)}
-                    className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 hover:border-valasys-orange hover:bg-orange-50 transition-all hover:shadow-md"
-                  >
-                    <div className="mb-2">{block.icon}</div>
-                    <span className="text-sm font-medium text-gray-900">
-                      {block.label}
-                    </span>
-                  </button>
+                  <DraggableBlockButton key={block.id} block={block} />
                 ))}
               </div>
             </div>
