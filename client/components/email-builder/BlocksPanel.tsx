@@ -235,16 +235,8 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </div>
         </TabsContent>
 
-        <TabsContent value="sections" className="flex flex-col m-0 p-4">
-          <div className="flex items-center justify-center py-8">
-            <div className="space-y-3 text-center">
-              <div className="p-4 rounded-lg border border-dashed border-gray-300">
-                <p className="text-sm text-gray-500">
-                  No pre-built sections yet. Create your own and save them!
-                </p>
-              </div>
-            </div>
-          </div>
+        <TabsContent value="sections" className="flex flex-col m-0">
+          <SectionsPanel onAddBlock={onAddBlock} />
         </TabsContent>
 
         <TabsContent value="saved" className="flex flex-col m-0 p-4">
