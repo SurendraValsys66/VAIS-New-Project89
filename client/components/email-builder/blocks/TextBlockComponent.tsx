@@ -24,15 +24,21 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
     return `${block.width}px`;
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onEdit();
+  };
+
   return (
     <div
-      className={`relative transition-all cursor-pointer ${
+      className={`relative transition-all cursor-pointer user-select-none ${
         isSelected ? "ring-2 ring-valasys-orange" : ""
       }`}
-      onClick={onEdit}
+      onClick={handleClick}
       style={{
         margin: `${block.margin}px`,
         display: "block",
+        userSelect: "none",
       }}
     >
       {isEditing ? (
