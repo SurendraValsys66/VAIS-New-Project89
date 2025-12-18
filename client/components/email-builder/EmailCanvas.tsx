@@ -9,9 +9,11 @@ interface EmailCanvasProps {
   template: EmailTemplate;
   templateSubject: string;
   selectedBlockId: string | null;
+  selectedFooterElement?: string | null;
   onAddBlock: (block: ContentBlock) => void;
   onBlockUpdate: (block: ContentBlock) => void;
   onBlockSelect: (id: string) => void;
+  onFooterElementSelect?: (element: string | null) => void;
   onTemplateSubjectChange: (subject: string) => void;
   onBackgroundColorChange: (color: string) => void;
 }
@@ -20,9 +22,11 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
   template,
   templateSubject,
   selectedBlockId,
+  selectedFooterElement,
   onAddBlock,
   onBlockUpdate,
   onBlockSelect,
+  onFooterElementSelect,
   onTemplateSubjectChange,
   onBackgroundColorChange,
 }) => {
@@ -126,8 +130,10 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                   <BlockRenderer
                     block={block}
                     isSelected={selectedBlockId === block.id}
+                    selectedFooterElement={selectedFooterElement}
                     onBlockUpdate={onBlockUpdate}
                     onBlockSelect={onBlockSelect}
+                    onFooterElementSelect={onFooterElementSelect}
                   />
                 </div>
               ))}

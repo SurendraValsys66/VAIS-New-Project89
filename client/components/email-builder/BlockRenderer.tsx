@@ -14,6 +14,7 @@ import { ProductBlockComponent } from "./blocks/ProductBlockComponent";
 import { NavigationBlockComponent } from "./blocks/NavigationBlockComponent";
 import { HeaderBlockComponent } from "./blocks/HeaderBlockComponent";
 import { FooterBlockComponent } from "./blocks/FooterBlockComponent";
+import { FooterWithSocialBlockComponent } from "./blocks/FooterWithSocialBlockComponent";
 import { SpacerBlockComponent } from "./blocks/SpacerBlockComponent";
 import { CenteredImageCardBlockComponent } from "./blocks/CenteredImageCardBlockComponent";
 import { SplitImageCardBlockComponent } from "./blocks/SplitImageCardBlockComponent";
@@ -22,8 +23,10 @@ interface BlockRendererProps {
   block: ContentBlock;
   isSelected: boolean;
   isEditing?: boolean;
+  selectedFooterElement?: string | null;
   onBlockUpdate: (block: ContentBlock) => void;
   onBlockSelect?: (blockId: string) => void;
+  onFooterElementSelect?: (element: string | null) => void;
 }
 
 export const BlockRenderer: React.FC<BlockRendererProps> = ({
@@ -164,6 +167,21 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
             block={block}
             isSelected={isSelected}
             onContentChange={(content) => onBlockUpdate({ ...block, content })}
+          />
+        </div>
+      );
+    case "footer-with-social":
+      return (
+        <div onClick={handleClick}>
+          <FooterWithSocialBlockComponent
+            block={block as any}
+            isSelected={isSelected}
+            selectedElement={selectedFooterElement}
+            onContentChange={(field, value) =>
+              onBlockUpdate({ ...block, [field]: value })
+            }
+            onSocialUpdate={(social) => onBlockUpdate({ ...block, social })}
+            onElementSelect={onFooterElementSelect}
           />
         </div>
       );
