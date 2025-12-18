@@ -245,41 +245,50 @@ function getStyleString(tag: string, existingStyle = ""): string {
  * Converts parsed nodes back to HTML string with proper styling
  */
 function nodesToHTML(nodes: ParsedNode[]): string {
-  return nodes
-    .map((node) => {
-      if (node.type === "text") {
-        return node.content || "";
-      }
+  try {
+    return nodes
+      .map((node) => {
+        if (!node) return "";
 
-      const tag = node.tag!;
-      const attributes = node.attributes || {};
+        if (node.type === "text") {
+          return node.content || "";
+        }
 
-      // Get styled string for semantic tags
-      const style = getStyleString(tag, attributes.style);
+        const tag = node.tag;
+        if (!tag) return "";
 
-      // Build attribute string
-      const attrString = Object.entries(attributes)
-        .filter(([key]) => key !== "style")
-        .map(([key, value]) => `${key}="${value}"`)
-        .join(" ");
+        const attributes = node.attributes || {};
 
-      // Recursively convert children
-      const innerHTML =
-        node.children && node.children.length > 0
-          ? nodesToHTML(node.children)
-          : attributes.alt || ""; // For img tags
+        // Get styled string for semantic tags
+        const style = getStyleString(tag, attributes.style);
 
-      // Build tag
-      const selfClosing = ["img", "br", "hr", "input"].includes(tag);
+        // Build attribute string
+        const attrString = Object.entries(attributes)
+          .filter(([key]) => key !== "style" && key && attributes[key] !== null)
+          .map(([key, value]) => `${key}="${String(value).replace(/"/g, "&quot;")}"`)
+          .join(" ");
 
-      if (selfClosing) {
-        return `<${tag} style="${style}"${attrString ? ` ${attrString}` : ""} />`;
-      }
+        // Recursively convert children
+        const innerHTML =
+          node.children && node.children.length > 0
+            ? nodesToHTML(node.children)
+            : attributes.alt || ""; // For img tags
 
-      const attrPart = attrString ? ` ${attrString}` : "";
-      return `<${tag} style="${style}"${attrPart}>${innerHTML}</${tag}>`;
-    })
-    .join("");
+        // Build tag
+        const selfClosing = ["img", "br", "hr", "input"].includes(tag);
+
+        if (selfClosing) {
+          return `<${tag} style="${style}"${attrString ? ` ${attrString}` : ""} />`;
+        }
+
+        const attrPart = attrString ? ` ${attrString}` : "";
+        return `<${tag} style="${style}"${attrPart}>${innerHTML}</${tag}>`;
+      })
+      .join("");
+  } catch (error) {
+    console.error("HTML to string conversion error:", error);
+    return "";
+  }
 }
 
 /**
