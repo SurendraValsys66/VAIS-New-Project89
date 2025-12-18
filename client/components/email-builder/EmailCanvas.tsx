@@ -3,8 +3,7 @@ import { useDrop } from "react-dnd";
 import { Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailTemplate, ContentBlock } from "./types";
-import { BlockRenderer } from "./BlockRenderer";
-import { BlockActions } from "./BlockActions";
+import { DraggableBlock } from "./DraggableBlock";
 
 interface EmailCanvasProps {
   template: EmailTemplate;
