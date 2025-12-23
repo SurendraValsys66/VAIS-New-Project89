@@ -712,130 +712,168 @@ export default function MyDownloadedList() {
                                   data-tour="send-to-crm-button"
                                   variant="outline"
                                   size="sm"
-                                  className="h-8 px-2 text-blue-700 border-blue-300 hover:bg-blue-600 hover:text-white"
+                                  className="h-8 px-2 text-blue-700 border-blue-300 hover:bg-blue-50 hover:text-blue-800 transition-colors"
                                   title="Send to CRM"
                                 >
                                   <UploadCloud className="h-3 w-3 mr-1" />
                                   Send to CRM
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-72">
-                                <DropdownMenuSub>
-                                  <DropdownMenuSubTrigger>
-                                    <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#00A1E0] text-white text-[10px] font-bold">
-                                      SF
-                                    </span>
-                                    <span className="ml-2">Salesforce</span>
-                                  </DropdownMenuSubTrigger>
-                                  <DropdownMenuSubContent className="w-80 p-2">
-                                    {salesforceAccounts.map((acc) => (
-                                      <DropdownMenuItem
-                                        key={acc.id}
-                                        onSelect={() => {
-                                          setCrmFile(file);
-                                          setSelectedCrm("salesforce");
-                                          setCrmDialogOpen(true);
-                                        }}
-                                        className="p-0"
-                                      >
-                                        <div className="flex items-center justify-between w-full rounded-md border border-valasys-gray-200 px-3 py-2 hover:bg-accent">
-                                          <span>{acc.name}</span>
-                                          <button
-                                            aria-label="Delete account"
-                                            className="text-red-600 hover:text-red-700 p-1 rounded hover:bg-red-50"
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              e.stopPropagation();
-                                              setSalesforceAccounts((prev) =>
-                                                prev.filter(
-                                                  (a) => a.id !== acc.id,
-                                                ),
-                                              );
-                                            }}
-                                            title="Delete account"
-                                          >
-                                            <Trash2 className="h-4 w-4" />
-                                          </button>
-                                        </div>
-                                      </DropdownMenuItem>
-                                    ))}
-                                    <DropdownMenuSeparator className="my-2" />
-                                    <DropdownMenuItem
-                                      className="w-full px-3 py-2 rounded-md bg-[#00A1E0] text-white hover:bg-[#008fcc] flex items-center"
-                                      onSelect={(e) => {
-                                        e.preventDefault();
-                                        setSfAddOpen(true);
-                                      }}
-                                    >
-                                      <Plus className="h-4 w-4 mr-2" />
-                                      Add Account
-                                    </DropdownMenuItem>
-                                  </DropdownMenuSubContent>
-                                </DropdownMenuSub>
-                                <DropdownMenuSub>
-                                  <DropdownMenuSubTrigger>
-                                    <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[10px] font-bold">
-                                      HS
-                                    </span>
-                                    <span className="ml-2">HubSpot</span>
-                                  </DropdownMenuSubTrigger>
-                                  <DropdownMenuSubContent className="w-80 p-2">
-                                    {hubspotAccounts.map((acc) => (
-                                      <DropdownMenuItem
-                                        key={acc.id}
-                                        onSelect={() => {
-                                          setCrmFile(file);
-                                          setSelectedCrm("hubspot");
-                                          setCrmDialogOpen(true);
-                                        }}
-                                        className="p-0"
-                                      >
-                                        <div className="flex items-center justify-between w-full rounded-md border border-valasys-gray-200 px-3 py-2 hover:bg-accent">
-                                          <span>{acc.name}</span>
-                                          <button
-                                            aria-label="Delete account"
-                                            className="text-red-600 hover:text-red-700 p-1 rounded hover:bg-red-50"
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              e.stopPropagation();
-                                              setHubspotAccounts((prev) =>
-                                                prev.filter(
-                                                  (a) => a.id !== acc.id,
-                                                ),
-                                              );
-                                            }}
-                                            title="Delete account"
-                                          >
-                                            <Trash2 className="h-4 w-4" />
-                                          </button>
-                                        </div>
-                                      </DropdownMenuItem>
-                                    ))}
-                                    <DropdownMenuSeparator className="my-2" />
-                                    <DropdownMenuItem
-                                      className="w-full px-3 py-2 rounded-md bg-[#FF7A59] text-white hover:bg-[#e7674f] flex items-center"
-                                      onSelect={(e) => {
-                                        e.preventDefault();
-                                        setHsAddOpen(true);
-                                      }}
-                                    >
-                                      <Plus className="h-4 w-4 mr-2" />
-                                      Add Account
-                                    </DropdownMenuItem>
-                                  </DropdownMenuSubContent>
-                                </DropdownMenuSub>
-                                <DropdownMenuItem
-                                  onSelect={() => {
-                                    setCrmFile(file);
-                                    setSelectedCrm("marketo");
-                                    setCrmDialogOpen(true);
-                                  }}
-                                >
-                                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#5C4BAF] text-white text-[10px] font-bold mr-2">
-                                    MK
-                                  </span>
-                                  Marketo
-                                </DropdownMenuItem>
+                              <DropdownMenuContent align="end" className="w-80 p-0">
+                                {/* Salesforce Section */}
+                                <div className="px-2 pt-2">
+                                  <div className="px-2 py-2 rounded-lg bg-blue-50 border border-blue-200 mb-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#00A1E0] text-white text-xs font-bold">
+                                        SF
+                                      </span>
+                                      <span className="text-sm font-semibold text-blue-900">Salesforce</span>
+                                    </div>
+                                  </div>
+                                  <div className="space-y-1 mb-2">
+                                    {salesforceAccounts.length === 0 ? (
+                                      <div className="px-2 py-2 text-xs text-gray-500 italic">
+                                        No accounts connected
+                                      </div>
+                                    ) : (
+                                      salesforceAccounts.map((acc) => (
+                                        <DropdownMenuItem
+                                          key={acc.id}
+                                          onSelect={() => {
+                                            setCrmFile(file);
+                                            setSelectedCrm("salesforce");
+                                            setCrmDialogOpen(true);
+                                          }}
+                                          className="p-0 rounded-md overflow-hidden focus:bg-transparent"
+                                        >
+                                          <div className="flex items-center justify-between w-full rounded-md border border-blue-200 bg-white px-3 py-2.5 hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                                            <div className="flex items-center gap-2 flex-1 cursor-pointer">
+                                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                                              <span className="text-sm font-medium text-gray-900">{acc.name}</span>
+                                            </div>
+                                            <button
+                                              aria-label="Delete account"
+                                              className="text-gray-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors"
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setSalesforceAccounts((prev) =>
+                                                  prev.filter(
+                                                    (a) => a.id !== acc.id,
+                                                  ),
+                                                );
+                                              }}
+                                              title="Delete account"
+                                            >
+                                              <Trash2 className="h-3.5 w-3.5" />
+                                            </button>
+                                          </div>
+                                        </DropdownMenuItem>
+                                      ))
+                                    )}
+                                  </div>
+                                  <DropdownMenuItem
+                                    className="rounded-md overflow-hidden focus:bg-transparent p-0"
+                                    onSelect={(e) => {
+                                      e.preventDefault();
+                                      setSfAddOpen(true);
+                                    }}
+                                  >
+                                    <div className="w-full px-3 py-2 rounded-md bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 hover:from-blue-100 hover:to-blue-200 border border-blue-300 hover:border-blue-400 flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                                      <Plus className="h-3.5 w-3.5" />
+                                      <span className="text-sm font-medium">Add Salesforce Account</span>
+                                    </div>
+                                  </DropdownMenuItem>
+                                </div>
+
+                                <DropdownMenuSeparator className="my-2" />
+
+                                {/* HubSpot Section */}
+                                <div className="px-2">
+                                  <div className="px-2 py-2 rounded-lg bg-orange-50 border border-orange-200 mb-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#FF7A59] text-white text-xs font-bold">
+                                        HS
+                                      </span>
+                                      <span className="text-sm font-semibold text-orange-900">HubSpot</span>
+                                    </div>
+                                  </div>
+                                  <div className="space-y-1 mb-2">
+                                    {hubspotAccounts.length === 0 ? (
+                                      <div className="px-2 py-2 text-xs text-gray-500 italic">
+                                        No accounts connected
+                                      </div>
+                                    ) : (
+                                      hubspotAccounts.map((acc) => (
+                                        <DropdownMenuItem
+                                          key={acc.id}
+                                          onSelect={() => {
+                                            setCrmFile(file);
+                                            setSelectedCrm("hubspot");
+                                            setCrmDialogOpen(true);
+                                          }}
+                                          className="p-0 rounded-md overflow-hidden focus:bg-transparent"
+                                        >
+                                          <div className="flex items-center justify-between w-full rounded-md border border-orange-200 bg-white px-3 py-2.5 hover:bg-orange-50 hover:border-orange-300 transition-colors">
+                                            <div className="flex items-center gap-2 flex-1 cursor-pointer">
+                                              <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
+                                              <span className="text-sm font-medium text-gray-900">{acc.name}</span>
+                                            </div>
+                                            <button
+                                              aria-label="Delete account"
+                                              className="text-gray-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors"
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setHubspotAccounts((prev) =>
+                                                  prev.filter(
+                                                    (a) => a.id !== acc.id,
+                                                  ),
+                                                );
+                                              }}
+                                              title="Delete account"
+                                            >
+                                              <Trash2 className="h-3.5 w-3.5" />
+                                            </button>
+                                          </div>
+                                        </DropdownMenuItem>
+                                      ))
+                                    )}
+                                  </div>
+                                  <DropdownMenuItem
+                                    className="rounded-md overflow-hidden focus:bg-transparent p-0"
+                                    onSelect={(e) => {
+                                      e.preventDefault();
+                                      setHsAddOpen(true);
+                                    }}
+                                  >
+                                    <div className="w-full px-3 py-2 rounded-md bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 hover:from-orange-100 hover:to-orange-200 border border-orange-300 hover:border-orange-400 flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                                      <Plus className="h-3.5 w-3.5" />
+                                      <span className="text-sm font-medium">Add HubSpot Account</span>
+                                    </div>
+                                  </DropdownMenuItem>
+                                </div>
+
+                                <DropdownMenuSeparator className="my-2" />
+
+                                {/* Marketo Option */}
+                                <div className="px-2 pb-2">
+                                  <DropdownMenuItem
+                                    onSelect={() => {
+                                      setCrmFile(file);
+                                      setSelectedCrm("marketo");
+                                      setCrmDialogOpen(true);
+                                    }}
+                                    className="rounded-md overflow-hidden focus:bg-transparent p-0"
+                                  >
+                                    <div className="w-full rounded-md border border-purple-200 bg-white px-3 py-2.5 hover:bg-purple-50 hover:border-purple-300 flex items-center gap-2 transition-colors cursor-pointer">
+                                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#5C4BAF] text-white text-xs font-bold">
+                                        MK
+                                      </span>
+                                      <span className="text-sm font-medium text-gray-900">Marketo</span>
+                                    </div>
+                                  </DropdownMenuItem>
+                                </div>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </div>
@@ -1281,27 +1319,58 @@ export default function MyDownloadedList() {
 
         {/* CRM Instruction Dialog */}
         <Dialog open={crmDialogOpen} onOpenChange={setCrmDialogOpen}>
-          <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Send to CRM</DialogTitle>
-              <DialogDescription>
-                Import "{crmFile?.fileName}.csv" into your preferred CRM using
-                the guided steps below.
-              </DialogDescription>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader className="pb-2">
+              <div className="flex items-center gap-3 mb-2">
+                {selectedCrm === "hubspot" && (
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#FF7A59] text-white text-xs font-bold">
+                    HS
+                  </span>
+                )}
+                {selectedCrm === "salesforce" && (
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#00A1E0] text-white text-xs font-bold">
+                    SF
+                  </span>
+                )}
+                {selectedCrm === "marketo" && (
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#5C4BAF] text-white text-xs font-bold">
+                    MK
+                  </span>
+                )}
+                <div>
+                  <DialogTitle>
+                    Send to{" "}
+                    {selectedCrm === "hubspot"
+                      ? "HubSpot"
+                      : selectedCrm === "salesforce"
+                        ? "Salesforce"
+                        : "Marketo"}
+                  </DialogTitle>
+                  <DialogDescription className="mt-1">
+                    Import CSV file "{crmFile?.fileName}" with{" "}
+                    <span className="font-semibold text-gray-700">
+                      {crmFile?.dataCount.toLocaleString()} records
+                    </span>
+                  </DialogDescription>
+                </div>
+              </div>
             </DialogHeader>
 
             {connectedCrms.length === 0 ? (
               <>
-                <Alert className="mb-4">
-                  <Info className="h-4 w-4" />
-                  <AlertTitle className="ml-2">
-                    No connected CRM account found
-                  </AlertTitle>
-                  <AlertDescription className="ml-6 -mt-4">
-                    You can still import the CSV manually using the steps below,
-                    or connect a CRM for one-click uploads.
-                  </AlertDescription>
-                </Alert>
+                <div className="rounded-lg border-l-4 border-l-blue-500 bg-blue-50 border border-blue-200 p-4 mb-6">
+                  <div className="flex gap-3">
+                    <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-blue-900 text-sm">
+                        No connected CRM account
+                      </p>
+                      <p className="text-blue-800 text-sm mt-1">
+                        You can import the CSV manually by following the guided steps below, or connect a CRM for one-click uploads.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <Accordion type="single" collapsible className="mb-4">
                   <AccordionItem value="connect">
                     <AccordionTrigger>
@@ -1362,17 +1431,29 @@ export default function MyDownloadedList() {
                 </div>
               </>
             ) : (
-              <div className="mb-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm">Choose CRM</CardTitle>
+              <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Step 1: Choose CRM */}
+                <Card className="relative overflow-hidden border-l-4 border-l-blue-500">
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-blue-50 rounded-bl-full opacity-50"></div>
+                  <CardHeader className="pb-3 relative z-10">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                          Step 1
+                        </div>
+                        <CardTitle className="text-sm">Select CRM Account</CardTitle>
+                      </div>
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-600 text-xs font-bold">
+                        1
+                      </span>
+                    </div>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="pt-0 relative z-10">
                     <Select
                       value={selectedCrm}
                       onValueChange={(v) => setSelectedCrm(v as any)}
                     >
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full border-blue-200 focus:border-blue-500">
                         <SelectValue placeholder="Select CRM" />
                       </SelectTrigger>
                       <SelectContent>
@@ -1389,11 +1470,24 @@ export default function MyDownloadedList() {
                     </Select>
                   </CardContent>
                 </Card>
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm">Upload file</CardTitle>
+
+                {/* Step 2: Upload File */}
+                <Card className="relative overflow-hidden border-l-4 border-l-orange-500">
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-orange-50 rounded-bl-full opacity-50"></div>
+                  <CardHeader className="pb-3 relative z-10">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-1">
+                          Step 2
+                        </div>
+                        <CardTitle className="text-sm">Upload Data</CardTitle>
+                      </div>
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-orange-600 text-xs font-bold">
+                        2
+                      </span>
+                    </div>
                   </CardHeader>
-                  <CardContent className="pt-0">
+                  <CardContent className="pt-0 relative z-10">
                     <Button
                       disabled={isUploadingCrm || uploadDone}
                       onClick={() => {
@@ -1403,31 +1497,27 @@ export default function MyDownloadedList() {
                           setUploadDone(true);
                         }, 1500);
                       }}
-                      className="w-full bg-gradient-to-r from-valasys-orange to-valasys-orange-light text-white"
+                      className={cn(
+                        "w-full transition-all",
+                        uploadDone
+                          ? "bg-green-500 hover:bg-green-600"
+                          : "bg-gradient-to-r from-valasys-orange to-valasys-orange-light text-white hover:shadow-lg",
+                      )}
                     >
                       {isUploadingCrm ? (
                         <>
-                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />{" "}
-                          Uploading to{" "}
-                          {selectedCrm === "hubspot"
-                            ? "HubSpot"
-                            : selectedCrm === "salesforce"
-                              ? "Salesforce"
-                              : "Marketo"}
-                          ...
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Uploading...
                         </>
                       ) : uploadDone ? (
                         <>
-                          <CheckCircle2 className="h-4 w-4 mr-2" /> Uploaded to{" "}
-                          {selectedCrm === "hubspot"
-                            ? "HubSpot"
-                            : selectedCrm === "salesforce"
-                              ? "Salesforce"
-                              : "Marketo"}
+                          <CheckCircle2 className="h-4 w-4 mr-2" />
+                          Upload Complete
                         </>
                       ) : (
                         <>
-                          <UploadCloud className="h-4 w-4 mr-2" /> Upload to{" "}
+                          <UploadCloud className="h-4 w-4 mr-2" />
+                          Upload to{" "}
                           {selectedCrm === "hubspot"
                             ? "HubSpot"
                             : selectedCrm === "salesforce"
@@ -1438,16 +1528,30 @@ export default function MyDownloadedList() {
                     </Button>
                   </CardContent>
                 </Card>
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm">Verify in CRM</CardTitle>
+
+                {/* Step 3: Verify in CRM */}
+                <Card className="relative overflow-hidden border-l-4 border-l-green-500">
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-green-50 rounded-bl-full opacity-50"></div>
+                  <CardHeader className="pb-3 relative z-10">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">
+                          Step 3
+                        </div>
+                        <CardTitle className="text-sm">Verify & Done</CardTitle>
+                      </div>
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100 text-green-600 text-xs font-bold">
+                        3
+                      </span>
+                    </div>
                   </CardHeader>
-                  <CardContent className="flex items-center gap-2 pt-0">
+                  <CardContent className="flex flex-col gap-2 pt-0 relative z-10">
                     <Button
                       asChild
                       variant="outline"
                       size="sm"
                       disabled={!uploadDone}
+                      className="border-green-300 hover:bg-green-50 disabled:opacity-50"
                     >
                       <a
                         href={
@@ -1460,7 +1564,7 @@ export default function MyDownloadedList() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Open{" "}
+                        <span>Open</span>
                         {selectedCrm === "hubspot"
                           ? "HubSpot"
                           : selectedCrm === "salesforce"
@@ -1468,7 +1572,7 @@ export default function MyDownloadedList() {
                             : "Marketo"}
                       </a>
                     </Button>
-                    <Button asChild variant="outline" size="sm">
+                    <Button asChild variant="outline" size="sm" className="border-gray-300">
                       <a
                         href={
                           selectedCrm === "hubspot"
@@ -1480,7 +1584,7 @@ export default function MyDownloadedList() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        View Import Guide
+                        View Guide
                       </a>
                     </Button>
                   </CardContent>
@@ -1488,52 +1592,88 @@ export default function MyDownloadedList() {
               </div>
             )}
 
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Badge variant="secondary" className="bg-blue-50 text-blue-700">
-                <UploadCloud className="h-3 w-3 mr-1" /> CSV ready to import
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <Badge className="bg-blue-100 text-blue-800 border border-blue-300 rounded-full px-3 py-1">
+                <UploadCloud className="h-3 w-3 mr-1.5" />
+                CSV Ready
               </Badge>
-              <Badge variant="secondary" className="bg-green-50 text-green-700">
-                <ShieldCheck className="h-3 w-3 mr-1" /> Email-based
-                de-duplication recommended
+              <Badge className="bg-green-100 text-green-800 border border-green-300 rounded-full px-3 py-1">
+                <ShieldCheck className="h-3 w-3 mr-1.5" />
+                De-duplication by Email
               </Badge>
               <Badge
-                variant="secondary"
-                className="bg-valasys-orange/10 text-valasys-orange"
+                className="bg-valasys-orange/10 text-valasys-orange border border-valasys-orange/30 rounded-full px-3 py-1"
               >
-                Selected CRM:{" "}
                 {selectedCrm === "hubspot"
-                  ? "HubSpot"
+                  ? "📊 HubSpot Import"
                   : selectedCrm === "salesforce"
-                    ? "Salesforce"
-                    : "Marketo"}
+                    ? "☁️ Salesforce Import"
+                    : "📈 Marketo Import"}
               </Badge>
+            </div>
+
+            <div className="mt-8 mb-6">
+              <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                Import Instructions
+              </h3>
             </div>
 
             <Tabs
               value={selectedCrm}
               onValueChange={(v) => setSelectedCrm(v as any)}
             >
-              <TabsList>
-                <TabsTrigger value="hubspot">HubSpot</TabsTrigger>
-                <TabsTrigger value="salesforce">Salesforce</TabsTrigger>
-                <TabsTrigger value="marketo">Marketo</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg mb-6">
+                <TabsTrigger
+                  value="hubspot"
+                  className="data-[state=active]:bg-white data-[state=active]:text-orange-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-orange-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[10px] font-bold mr-2">
+                    HS
+                  </span>
+                  HubSpot
+                </TabsTrigger>
+                <TabsTrigger
+                  value="salesforce"
+                  className="data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#00A1E0] text-white text-[10px] font-bold mr-2">
+                    SF
+                  </span>
+                  Salesforce
+                </TabsTrigger>
+                <TabsTrigger
+                  value="marketo"
+                  className="data-[state=active]:bg-white data-[state=active]:text-purple-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-purple-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#5C4BAF] text-white text-[10px] font-bold mr-2">
+                    MK
+                  </span>
+                  Marketo
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="hubspot">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base flex items-center">
-                        <ListChecks className="h-4 w-4 mr-2 text-valasys-orange" />
-                        What you'll do
+                  <Card className="border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 to-white">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm flex items-center text-orange-900">
+                        <ListChecks className="h-4 w-4 mr-2 text-orange-600 flex-shrink-0" />
+                        <span>What you'll do</span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm text-gray-700 space-y-2">
-                      <p>Import to HubSpot Contacts or Companies.</p>
-                      <p>
-                        Map Email, Name, Company, Title, and Location fields.
-                      </p>
-                      <p>Enable updates of existing records by Email.</p>
+                      <div className="flex gap-2">
+                        <span className="text-orange-600 font-bold">•</span>
+                        <span>Import to HubSpot Contacts or Companies</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-orange-600 font-bold">•</span>
+                        <span>Map Email, Name, Company, Title, Location</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-orange-600 font-bold">•</span>
+                        <span>Enable updates of existing records by Email</span>
+                      </div>
                     </CardContent>
                   </Card>
 
